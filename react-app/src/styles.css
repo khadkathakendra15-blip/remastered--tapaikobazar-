@@ -1112,11 +1112,6 @@ body:not(.has-hero) #view { padding-top: 76px; }
 .storebar__count { font-size: 12.5px; color: var(--slate); white-space: nowrap; }
 .storebar__count strong { color: var(--navy); font-weight: 600; }
 
-/* ---------------------------------------------------------- photo watermark */
-.shot-mark {
-  display: none !important;
-}
-
 /* --------------------------------------------------- unphotographed stock */
 
 .shot-none {

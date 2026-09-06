@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { urlFor } from '../lib/sanity';
 
-/* One component renders every vehicle photograph on the site, so the watermark
-   goes on here and lands everywhere automatically — cards, the vehicle page,
-   the gallery, the related rows, the finance summary. */
+/* One component renders every vehicle photograph on the site — cards,
+   the vehicle page, the gallery, the related rows, the finance summary. */
 export default function Shot({ vehicle, src, loading = 'lazy' }) {
   const rawImg = src !== undefined ? src : (vehicle?.thumbnail || vehicle?.img);
   const [failed, setFailed] = useState(false);
