@@ -1121,14 +1121,14 @@ body:not(.has-hero) #view { padding-top: 76px; }
    ceiling so it never turns illegible or starts competing with the vehicle. */
 .shot-mark {
   position: absolute;
-  right: 3.2%;
-  bottom: 3.2%;
-  width: 35%;
-  min-width: 96px;
-  max-width: 215px;
+  right: 3%;
+  bottom: 3%;
+  width: 48%;
+  min-width: 135px;
+  max-width: 290px;
   aspect-ratio: 1043 / 748;
   background: url('/assets/logo.png') right bottom / contain no-repeat;
-  opacity: 0.85;
+  opacity: 0.88;
   /* Lifts it off a bright sky, which the white outline alone cannot do. */
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
   pointer-events: none;
@@ -1136,7 +1136,7 @@ body:not(.has-hero) #view { padding-top: 76px; }
 }
 
 /* Smaller frames get a proportionally larger mark, or it disappears. */
-.summary__shot .shot-mark { width: 42%; min-width: 110px; }
+.summary__shot .shot-mark { width: 54%; min-width: 145px; }
 
 /* Below about a hundred pixels the wordmark is a smudge rather than a claim,
    so the thumbnail rows go without. The full photograph still carries it. */
