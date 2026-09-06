@@ -4,14 +4,21 @@ import Shot from '../components/Shot';
 import { CONTACT } from '../data/catalogue';
 import { useFilters } from '../lib/filtersContext';
 import { npr, priceText } from '../lib/format';
+import { getYoutubeId } from '../lib/sanity';
 
 export default function VehicleDetail() {
   const { id } = useParams();
   const f = useFilters();
   const v = f.findVehicle(id);
+
+  const youtubeId = v ? getYoutubeId(v.youtubeUrl) : null;
+  const [activeMedia, setActiveMedia] = useState(youtubeId ? 'video' : 'photo');
   const [shotAt, setShotAt] = useState(0);
 
-  useEffect(() => setShotAt(0), [id]);
+  useEffect(() => {
+    setShotAt(0);
+    setActiveMedia(youtubeId ? 'video' : 'photo');
+  }, [id, youtubeId]);
 
   /* Mobile only: the sticky bar needs room at the foot of the page. */
   useEffect(() => {
@@ -51,18 +58,72 @@ export default function VehicleDetail() {
       <div className="detail">
         <div className="detail__left">
           <div className="detail__hero">
-            <Shot vehicle={v} src={mainImg} loading="eager" />
+            {activeMedia === 'video' && youtubeId ? (
+              <div className="detail__video-frame">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
+                  title={`${v.name} Video Review`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="detail__iframe"
+                />
+              </div>
+            ) : (
+              <>
+                <Shot vehicle={v} src={mainImg} loading="eager" />
+                {youtubeId ? (
+                  <button
+                    type="button"
+                    className="detail__play-cta"
+                    onClick={() => setActiveMedia('video')}
+                    aria-label="Play YouTube Video"
+                  >
+                    <span className="detail__play-cta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                    <span>Watch Video</span>
+                  </button>
+                ) : null}
+              </>
+            )}
           </div>
 
-          {shots.length > 1 ? (
+          {(shots.length > 1 || youtubeId) ? (
             <div className="detail__thumbs">
+              {youtubeId ? (
+                <button
+                  key="yt-video"
+                  type="button"
+                  className={`detail__thumb detail__thumb--video${activeMedia === 'video' ? ' is-on' : ''}`}
+                  onClick={() => setActiveMedia('video')}
+                  title="Watch YouTube video"
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${youtubeId}/mqdefault.jpg`}
+                    alt={`${v.name} video thumbnail`}
+                  />
+                  <span className="detail__thumb-play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                  <span className="detail__thumb-badge">Video</span>
+                </button>
+              ) : null}
+
               {shots.map((src, i) => (
                 <button
                   key={src}
-                  className={`detail__thumb${i === shotAt ? ' is-on' : ''}`}
-                  onClick={() => setShotAt(i)}
+                  type="button"
+                  className={`detail__thumb${activeMedia === 'photo' && i === shotAt ? ' is-on' : ''}`}
+                  onClick={() => {
+                    setActiveMedia('photo');
+                    setShotAt(i);
+                  }}
                 >
-                  <img src={src} alt={v.name} />
+                  <img src={src} alt={`${v.name} photo ${i + 1}`} />
                 </button>
               ))}
             </div>

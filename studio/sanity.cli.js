@@ -6,5 +6,8 @@ module.exports = defineCliConfig({
     dataset: 'production',
   },
   studioHost: 'tapaikobazar',
-  autoUpdates: true,
+  deployment: {
+    appId: 'fa8uvzwehpwcq86tg0uca9ba',
+    autoUpdates: true,
+  },
 });

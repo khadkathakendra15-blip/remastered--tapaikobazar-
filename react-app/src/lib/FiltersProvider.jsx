@@ -24,19 +24,25 @@ export default function FiltersProvider({ children }) {
     try {
       const sanityData = await fetchSanityVehicles();
       if (Array.isArray(sanityData) && sanityData.length > 0) {
-        // Merge Sanity vehicles with baseline CATALOGUE so all categories remain populated
-        const merged = [...CATALOGUE];
-        sanityData.forEach((sDoc) => {
-          const idx = merged.findIndex((c) => c.id === sDoc.id || c._id === sDoc._id);
-          if (idx !== -1) {
-            merged[idx] = { ...merged[idx], ...sDoc };
-          } else {
-            // New vehicle created in Sanity Studio - prepend to top
-            merged.unshift(sDoc);
-          }
-        });
-        setAllVehicles(merged);
-        setActiveCatalogue(merged);
+        // If Sanity is populated with full catalogue, Sanity is the authoritative master
+        if (sanityData.length >= 10) {
+          setAllVehicles(sanityData);
+          setActiveCatalogue(sanityData);
+        } else {
+          // If only partial items exist in Sanity, merge with baseline so categories remain populated
+          const merged = [...CATALOGUE];
+          sanityData.forEach((sDoc) => {
+            const idx = merged.findIndex((c) => c.id === sDoc.id || c._id === sDoc._id);
+            if (idx !== -1) {
+              merged[idx] = { ...merged[idx], ...sDoc };
+            } else {
+              // New vehicle created in Sanity Studio - prepend to top
+              merged.unshift(sDoc);
+            }
+          });
+          setAllVehicles(merged);
+          setActiveCatalogue(merged);
+        }
         setIsSanityConnected(true);
       }
     } catch (err) {

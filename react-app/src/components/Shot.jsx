@@ -5,7 +5,7 @@ import { urlFor } from '../lib/sanity';
    goes on here and lands everywhere automatically — cards, the vehicle page,
    the gallery, the related rows, the finance summary. */
 export default function Shot({ vehicle, src, loading = 'lazy' }) {
-  const rawImg = src !== undefined ? src : vehicle?.img;
+  const rawImg = src !== undefined ? src : (vehicle?.thumbnail || vehicle?.img);
   const [failed, setFailed] = useState(false);
 
   let imgSrc = null;

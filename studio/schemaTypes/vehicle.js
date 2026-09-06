@@ -1,4 +1,6 @@
 import { defineField, defineType } from 'sanity';
+import WebPImageInput from '../components/WebPImageInput';
+import WebPGalleryInput from '../components/WebPGalleryInput';
 
 export default defineType({
   name: 'vehicle',
@@ -71,10 +73,25 @@ export default defineType({
       description: 'Optional status badge shown on cards (e.g. "New arrival", "Pre-booking open", "Coming soon")',
     }),
     defineField({
-      name: 'image',
-      title: 'Main Photo',
+      name: 'thumbnail',
+      title: 'Card Thumbnail Photo (Optional)',
       type: 'image',
-      description: 'Upload main photograph. You can crop, replace, or delete this photo anytime.',
+      description: 'Optional: Dedicated photo framed for vehicle cards & listings. Auto-converts to WebP & compresses < 500KB. (If empty, Main Photo will be used).',
+      components: {
+        input: WebPImageInput,
+      },
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'image',
+      title: 'Main Photo (Store & Showcase)',
+      type: 'image',
+      description: 'Upload main photograph for vehicle detail page. Auto-converts any image to WebP and compresses under 500KB.',
+      components: {
+        input: WebPImageInput,
+      },
       options: {
         hotspot: true,
       },
@@ -89,13 +106,22 @@ export default defineType({
       name: 'gallery',
       title: 'Photo Gallery',
       type: 'array',
-      description: 'Upload additional showroom or detail photos. Add, delete, or drag to reorder.',
+      description: 'Upload showroom or detail photos. Supports multi-photo batch upload with automatic WebP conversion and sub-500KB compression.',
+      components: {
+        input: WebPGalleryInput,
+      },
       of: [
         {
           type: 'image',
           options: { hotspot: true },
         },
       ],
+    }),
+    defineField({
+      name: 'youtubeUrl',
+      title: 'YouTube Video URL (Review / Walkaround)',
+      type: 'url',
+      description: 'Paste any YouTube video or Shorts link (e.g. https://www.youtube.com/watch?v=... or https://youtu.be/...). Displays clickable alongside photos on the vehicle store page.',
     }),
     defineField({
       name: 'blurb',

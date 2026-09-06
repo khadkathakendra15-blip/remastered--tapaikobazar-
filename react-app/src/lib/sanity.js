@@ -42,17 +42,29 @@ export function heroSources(imageRef, fallback) {
   };
 }
 
+export function getYoutubeId(url) {
+  if (!url || typeof url !== 'string') return null;
+  const match = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/
+  );
+  return match ? match[1] : null;
+}
+
 export function mapSanityVehicle(doc) {
   if (!doc) return null;
 
   // Resolve main image URL
   let img = null;
   if (doc.image?.asset) {
-    /* 1600 rather than 1000: a card only needs ~860 device pixels, but the
-       vehicle page runs this same URL across half a retina screen. */
     img = urlFor(doc.image).auto('format').fit('max').width(1600).url();
   } else if (doc.imageUrl) {
     img = doc.imageUrl;
+  }
+
+  // Resolve dedicated thumbnail URL if provided
+  let thumbnail = null;
+  if (doc.thumbnail?.asset) {
+    thumbnail = urlFor(doc.thumbnail).auto('format').fit('max').width(1000).url();
   }
 
   // Resolve gallery images
@@ -113,12 +125,11 @@ export function mapSanityVehicle(doc) {
     priceLabel: doc.priceLabel || null,
     down: downVal,
     status: doc.status || null,
-    img: img,
-    /* The unresolved asset, so a surface that needs its own aspect ratio can
-       ask Sanity to crop around the hotspot instead of letting the browser
-       zoom into the middle of a landscape frame. */
+    thumbnail: thumbnail || img,
+    img: img || thumbnail,
     imageRef: doc.image?.asset ? doc.image : null,
     gallery: gallery,
+    youtubeUrl: doc.youtubeUrl || null,
     blurb: doc.blurb || '',
     seatsMin: doc.seatsMin ?? (doc.type === 'van' ? 11 : 5),
     seatsMax: doc.seatsMax ?? (doc.type === 'van' ? (doc.seatsMin || 11) : 5),
@@ -140,9 +151,11 @@ export async function fetchSanityVehicles() {
     priceLabel,
     down,
     status,
+    thumbnail,
     image,
     imageUrl,
     gallery,
+    youtubeUrl,
     blurb,
     seatsMin,
     seatsMax,
