@@ -1113,8 +1113,36 @@ body:not(.has-hero) #view { padding-top: 76px; }
 .storebar__count strong { color: var(--navy); font-weight: 600; }
 
 /* ---------------------------------------------------------- photo watermark */
+
+/* The real logo, bottom right of every vehicle photograph. It carries its own
+   white outline, so it reads on a dark bonnet and on a pale forecourt alike
+   without needing a plate behind it. Sized as a share of the frame so one rule
+   serves a 186px card and a 440px hero, then held between a floor and a
+   ceiling so it never turns illegible or starts competing with the vehicle. */
 .shot-mark {
-  display: none !important;
+  position: absolute;
+  right: 3.2%;
+  bottom: 3.2%;
+  width: 27%;
+  min-width: 76px;
+  max-width: 172px;
+  aspect-ratio: 1043 / 748;
+  background: url('/assets/logo.png') right bottom / contain no-repeat;
+  opacity: 0.82;
+  /* Lifts it off a bright sky, which the white outline alone cannot do. */
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Smaller frames get a proportionally larger mark, or it disappears. */
+.summary__shot .shot-mark { width: 34%; min-width: 82px; }
+
+/* Below about a hundred pixels the wordmark is a smudge rather than a claim,
+   so the thumbnail rows go without. The full photograph still carries it. */
+.related__shot .shot-mark,
+.detail__thumb .shot-mark {
+  display: none;
 }
 
 /* --------------------------------------------------- unphotographed stock */
