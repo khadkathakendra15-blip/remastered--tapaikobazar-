@@ -229,11 +229,11 @@ body:not(.has-hero) #view { padding-top: 76px; }
 
 .masthead__logo { cursor: pointer; display: flex; align-items: center; background: none; border: none; padding: 0; }
 .masthead__logo img {
-  height: 60px; width: auto;
+  height: 74px; width: auto;
   filter: drop-shadow(0 1px 8px rgba(0, 20, 40, 0.55));
   transition: height 0.3s ease, filter 0.3s ease;
 }
-.masthead.is-solid .masthead__logo img { height: 48px; filter: none; }
+.masthead.is-solid .masthead__logo img { height: 56px; filter: none; }
 
 /* Micro-type nav: small, letterspaced, quiet until hovered. */
 .masthead__nav { display: flex; gap: 34px; }
@@ -1865,7 +1865,7 @@ body.is-drawer-open { overflow: hidden; }
   /* The nav and the desktop actions move into the slide-in menu, leaving a
      short bar that can stay stuck to the top of the screen. */
   .masthead { padding: 8px var(--gutter); gap: 12px; }
-  .masthead__logo img { height: 38px; }
+  .masthead__logo img { height: 50px; }
   .masthead__nav { display: none; }
   .masthead__actions { display: none; }
   .masthead__compact { display: flex; }
