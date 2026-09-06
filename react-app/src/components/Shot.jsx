@@ -36,11 +36,6 @@ export default function Shot({ vehicle, src, loading = 'lazy' }) {
   }
 
   return (
-    <>
-      <img src={imgSrc} alt={vehicle?.name || 'Vehicle'} loading={loading} onError={() => setFailed(true)} />
-      {/* Decorative: the brand is already in the masthead and the alt text, so
-          this must not be announced again. */}
-      <span className="shot-mark" aria-hidden="true" />
-    </>
+    <img src={imgSrc} alt={vehicle?.name || 'Vehicle'} loading={loading} onError={() => setFailed(true)} />
   );
 }

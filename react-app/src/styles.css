@@ -1112,34 +1112,10 @@ body:not(.has-hero) #view { padding-top: 76px; }
 .storebar__count { font-size: 12.5px; color: var(--slate); white-space: nowrap; }
 .storebar__count strong { color: var(--navy); font-weight: 600; }
 
-/* ---------------------------------------------------------- photo watermark
-
-   Sits on every vehicle photograph, courtesy of the Shot component. The logo
-   is dark ink on transparent, so it is knocked out to white and softened —
-   readable on a dark bonnet or a bright showroom floor alike, without fighting
-   the vehicle for attention. Never intercepts a click. */
-
+/* ---------------------------------------------------------- photo watermark */
 .shot-mark {
-  position: absolute;
-  right: 3.5%;
-  bottom: 3.5%;
-  width: 26%;
-  min-width: 46px;
-  max-width: 104px;
-  aspect-ratio: 1062 / 752;
-  background: url('/assets/logo.png') right bottom / contain no-repeat;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 20, 40, 0.5));
-  opacity: 0.62;
-  pointer-events: none;
-  z-index: 2;
+  display: none !important;
 }
-
-/* Too small to read, so it would only be noise. */
-.detail__thumb .shot-mark,
-.related__shot .shot-mark { display: none; }
-
-/* Room to breathe on the big one. */
-.detail__hero .shot-mark { width: 18%; max-width: 150px; right: 2.5%; bottom: 2.5%; }
 
 /* --------------------------------------------------- unphotographed stock */
 
