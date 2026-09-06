@@ -36,12 +36,6 @@ export default function Shot({ vehicle, src, loading = 'lazy' }) {
   }
 
   return (
-    <>
-      <img src={imgSrc} alt={vehicle?.name || 'Vehicle'} loading={loading} onError={() => setFailed(true)} />
-      {/* The showroom's own logo, corner set, not a white silhouette. It is a
-          span carrying a background rather than an img, because every frame on
-          the site styles `img` to fill and crop and that would swallow it. */}
-      <span className="shot-mark" aria-hidden="true" />
-    </>
+    <img src={imgSrc} alt={vehicle?.name || 'Vehicle'} loading={loading} onError={() => setFailed(true)} />
   );
 }
