@@ -11,7 +11,7 @@ const IMG = {
   dong14: 'https://trivenimotocorp.com.np/public/images/1272401361489950890_122186397518255162_2520902099410590018_n.jpg',
   dfacEm26: '/assets/dfac-em26.jpg',
   dfacEv32: '/assets/dfac-ev32.jpg',
-  kawai: 'https://hams.com.np/upload_file/blog/1772530764_1385603448_hams%20ev%20van%20(87%20of%20151).JPG',
+  kawai: 'https://www.gneenev.com/d/files/xhszy1.jpg',
   higer: 'https://en.higer.com/uploadfiles/2024/11/20241120102842890.jpg?MjAyNDExMjAxMDI4NDI4OTAuanBn',
   joylong: 'https://vgnepalev.com/wp-content/uploads/2024/11/Untitled-design-2024-11-29T143713.056.png',
   king14: 'https://www.cgdigital.com.np/api/images/products/HzQiaO_1733388745-KINGLONG01.jpg',

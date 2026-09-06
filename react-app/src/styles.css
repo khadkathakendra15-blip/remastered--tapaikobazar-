@@ -1143,6 +1143,29 @@ body:not(.has-hero) #view { padding-top: 76px; }
 .related__shot .shot-none__brand, .related__shot .shot-none__note { display: none; }
 .related__shot .shot-none__name { font-size: 12px; }
 
+/* --------------------------------------------------- related vehicles on detail page */
+.related { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+.related__item {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: inherit;
+  padding: 8px 10px; border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+.related__item:hover { background: rgba(0, 38, 71, 0.04); }
+.related__shot {
+  position: relative;
+  width: 88px;
+  height: 56px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--img-bg);
+  border-radius: 2px;
+}
+.related__shot img { width: 100%; height: 100%; object-fit: cover; }
+.related__meta { display: flex; flex-direction: column; gap: 2px; }
+.related__name { font-family: var(--serif); font-size: 16px; color: var(--navy); line-height: 1.2; }
+.related__price { font-size: 11.5px; color: var(--slate); }
+
 /* Electric / petrol chips, on the navy section header. */
 .typechips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 
