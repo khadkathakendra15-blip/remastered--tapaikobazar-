@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero';
+import { PrismaHero } from '../components/ui/prisma-hero';
 import Section from '../components/Section';
 import VehicleCard from '../components/VehicleCard';
 import { BrandPills, TypeChips, VanFilterBar } from '../components/Filters';
@@ -194,7 +194,19 @@ export default function Browse() {
 
   return (
     <>
-      <Hero />
+      <div className="hero">
+        <PrismaHero
+          title="TapaikoBazar"
+          showAsterisk={false}
+          description="Panipokhari, Kathmandu showroom — Nepal's most trusted vehicle marketplace for affordable electric vans, scooters, cars and bikes with easy financing."
+          buttonText="Explore Vehicles"
+          showNav={false}
+          onButtonClick={() => {
+            const el = document.getElementById('browse');
+            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+          }}
+        />
+      </div>
 
       <div id="browse">
         <Section
