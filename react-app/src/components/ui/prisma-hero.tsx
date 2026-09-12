@@ -90,6 +90,7 @@ export interface PrismaHeroProps {
   navItems?: string[];
   showNav?: boolean;
   blockSrc?: string;
+  videoSrc?: string;
 }
 
 const defaultNavItems = ["Our story", "Collective", "Workshops", "Programs", "Inquiries"];
@@ -103,52 +104,54 @@ const PrismaHero: React.FC<PrismaHeroProps> = ({
   navItems = defaultNavItems,
   showNav = true,
   blockSrc = "/assets/block.png",
+  videoSrc = "/assets/clean_sky.mp4",
 }) => {
   return (
     <section className="h-screen w-full relative">
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
         
-        {/* Background sky video */}
+        {/* Background sky video without the old cliff/block */}
         <video
           autoPlay
           loop
           muted
           playsInline
+          poster="/assets/clean_sky.jpg"
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+          src={videoSrc}
         />
 
         {/* Noise overlay */}
-        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
+        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.6] mix-blend-overlay" />
 
-        {/* Gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+        {/* Gradient overlay for readability and depth */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/75" />
 
-        {/* Levitating Floating Island Block */}
+        {/* Levitating Floating Island Block (Nepali Island with TapaikoBazar Van) */}
         {blockSrc && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-10">
             <motion.div
               initial={{ y: 24, opacity: 0, scale: 0.94 }}
               animate={{
-                y: [-12, 12, -12],
+                y: [-14, 14, -14],
                 opacity: 1,
                 scale: 1,
               }}
               transition={{
                 y: {
-                  duration: 6,
+                  duration: 5.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                 },
                 opacity: { duration: 1.2, delay: 0.2 },
                 scale: { duration: 1.2, delay: 0.2 },
               }}
-              className="relative w-[88%] max-w-[850px] sm:max-w-[1000px] md:max-w-[1150px] lg:max-w-[1250px] -mt-12 sm:-mt-20 md:-mt-24"
+              className="relative w-[88%] max-w-[850px] sm:max-w-[1000px] md:max-w-[1150px] lg:max-w-[1250px] -mt-10 sm:-mt-16 md:-mt-20"
             >
               <img
                 src={blockSrc}
                 alt="TapaikoBazar Levitating Block"
-                className="w-full h-auto object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,0.65)]"
+                className="w-full h-auto object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,0.6)]"
               />
             </motion.div>
           </div>
