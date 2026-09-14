@@ -167,3 +167,5 @@ inside the range. `vanTerms()` fills in the financing rows every van shares.
 
 If a van lands above NPR 85,00,000, raise `VAN_PRICE_MAX` in `js/app.js` — it is the top
 of the price slider.
+#   r e m a s t e r e d - - t a p a i k o b a z a r - 2  
+ 
