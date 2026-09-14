@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PrismaHero } from '../components/ui/prisma-hero';
+import { VolumetricHero } from '../components/ui/volumetric-hero';
 import Section from '../components/Section';
 import VehicleCard from '../components/VehicleCard';
 import { BrandPills, TypeChips, VanFilterBar } from '../components/Filters';
@@ -194,19 +194,33 @@ export default function Browse() {
 
   return (
     <>
-      <div className="hero">
-        <PrismaHero
-          title="TapaikoBazar"
-          showAsterisk={false}
-          description="Panipokhari, Kathmandu showroom — Nepal's most trusted vehicle marketplace for affordable electric vans, scooters, cars and bikes with easy financing."
-          buttonText="Explore Vehicles"
-          showNav={false}
-          onButtonClick={() => {
+      <VolumetricHero
+        kicker="Nepal's most trusted EV marketplace"
+        headline={[
+          { text: 'Buy, sell &', className: 'text-white' },
+          {
+            text: 'finance',
+            className: 'italic text-[#FF4D5E]',
+            style: { fontFamily: "'Instrument Serif', Georgia, serif" },
+          },
+          { text: 'electric vehicles.', className: 'text-white' },
+        ]}
+        brandLine="TapaikoBazar · Panipokhari, Kathmandu"
+        description="Electric vans, cars, scooters and bikes — handpicked, road-ready and financed in-house over five years. Come see them at Panipokhari, opposite NIMB Bank."
+        primaryCta={{
+          text: 'Explore vehicles',
+          onClick: () => {
             const el = document.getElementById('browse');
             if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-          }}
-        />
-      </div>
+          },
+        }}
+        secondaryCta={{ text: 'Get finance', href: '#recondition' }}
+        stats={[
+          { value: '5-yr', label: 'In-house finance' },
+          { value: '3-day', label: 'Paperwork, most files' },
+          { value: '300+', label: 'Vehicles delivered' },
+        ]}
+      />
 
       <div id="browse">
         <Section

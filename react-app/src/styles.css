@@ -31,19 +31,25 @@
   --gutter: 48px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Reset and base element styling live in @layer base so Tailwind's utilities
+   (a later cascade layer) can win over them inside the shadcn/ui components —
+   without a layer, this unlayered reset would beat every p-*, m-* and text-*
+   utility. The site's own class rules stay unlayered and keep their precedence. */
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  font-family: var(--body);
-  background: var(--bg);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--red); text-decoration: none; }
+  a:hover { color: var(--red-dark); }
+
+  ::selection { background: var(--red); color: #fff; }
 }
-
-a { color: var(--red); text-decoration: none; }
-a:hover { color: var(--red-dark); }
-
-::selection { background: var(--red); color: #fff; }
 
 /* ------------------------------------------------------------------- motion
 
