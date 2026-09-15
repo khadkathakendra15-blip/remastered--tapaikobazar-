@@ -283,10 +283,12 @@ function Room({
 }
 export const VolumetricStudio = ({
   className,
-  children
+  children,
+  backWall,
 }: {
   className?: string;
   children?: React.ReactNode;
+  backWall?: RoomProps["backWall"];
 }) => {
   const [lightsOn, setLightsOn] = useState(false);
   const [isFlickering, setIsFlickering] = useState(true);
@@ -329,7 +331,7 @@ export const VolumetricStudio = ({
         /* TapaikoBazar brand: left beam red, centre white, right beam blue. */
         spotColors={["255,70,84", "235,242,255", "70,120,255"]}
         isFlickering={isFlickering}
-        backWall={{ tl: [20, 8], tr: [80, 8], br: [80, 56], bl: [20, 56] }}
+        backWall={backWall ?? { tl: [20, 8], tr: [80, 8], br: [80, 56], bl: [20, 56] }}
       />
       <div className="relative z-10 w-full h-full pointer-events-none">
         {children}

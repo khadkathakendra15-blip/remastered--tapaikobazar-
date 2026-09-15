@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { VolumetricStudio } from "@/components/ui/volumetric-studio";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -53,55 +54,58 @@ export function VolumetricHero({
   stats,
 }: VolumetricHeroProps) {
   const primary = primaryCta ?? { text: "Book now" };
+  // On phones the van is nearly full-width, so widen the studio's back wall
+  // (thinner side walls) to keep the van inside the room instead of spilling
+  // onto the side walls. Desktop keeps its deeper default room.
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const backWall: { tl: [number, number]; tr: [number, number]; br: [number, number]; bl: [number, number] } | undefined =
+    isMobile ? { tl: [7, 7], tr: [93, 7], br: [93, 56], bl: [7, 56] } : undefined;
 
   // Headline content, shared by the mobile and desktop layouts ("Electric" in
   // the TapaikoBazar blue for a touch of brand colour).
   const headlineInner = (
     <>
-      The Ultimate
+      Buy, Sell
       <br />
+      and{" "}
       <span className="bg-linear-to-b from-[#6a9bff] to-[#1e50c0] bg-clip-text text-transparent">
-        Electric
-      </span>{" "}
-      Van.
+        Finance
+      </span>
     </>
   );
 
-  // The two CTAs, rendered as full-width pills on mobile and fixed-width on desktop.
+  // Mobile keeps it to a single line — no <br /> — so it reads across in one
+  // sweep, at a smaller size than the desktop rail.
+  const headlineInnerMobile = (
+    <>
+      Buy, Sell and{" "}
+      <span className="bg-linear-to-b from-[#6a9bff] to-[#1e50c0] bg-clip-text text-transparent">
+        Finance
+      </span>
+    </>
+  );
+
+  // Single "Apply Finance" CTA, in the compact dark rectangular style of the
+  // reference (uppercase, letter-spaced, thin border, small icon).
   const renderCtas = (mobile: boolean) => {
-    const shape = mobile
-      ? "w-full rounded-full py-4 pl-6 pr-5 text-base"
-      : "w-[220px] rounded-md py-3 pl-5 pr-4 text-sm sm:text-base";
-    return (
+    const cta = secondaryCta ?? primary;
+    const cls = `group inline-flex items-center gap-2.5 rounded-[4px] border border-white/25 bg-black/30 font-semibold uppercase text-white backdrop-blur-sm transition-colors hover:border-white/55 hover:bg-white/10 ${
+      mobile ? "px-6 py-3.5 text-xs tracking-[0.16em]" : "px-7 py-3.5 text-xs tracking-[0.16em] sm:text-[13px]"
+    }`;
+    const inner = (
       <>
-        <button
-          type="button"
-          onClick={primary.onClick}
-          className={`group inline-flex items-center justify-between ${shape} bg-[#FF4D5E] font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(255,77,94,0.35)] transition-colors hover:bg-[#ff3348]`}
-        >
-          {primary.text || "Book now"}
-          <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-        </button>
-        {secondaryCta &&
-          (secondaryCta.href ? (
-            <a
-              href={secondaryCta.href}
-              className={`inline-flex items-center justify-between ${shape} border border-white/25 font-semibold tracking-wide text-white transition-colors hover:border-white/60 hover:bg-white/10`}
-            >
-              {secondaryCta.text || "Apply finance"}
-              <ArrowRight className="h-5 w-5" />
-            </a>
-          ) : (
-            <button
-              type="button"
-              onClick={secondaryCta.onClick}
-              className={`inline-flex items-center justify-between ${shape} border border-white/25 font-semibold tracking-wide text-white transition-colors hover:border-white/60 hover:bg-white/10`}
-            >
-              {secondaryCta.text || "Apply finance"}
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          ))}
+        Apply Finance
+        <ArrowRight className="h-4 w-4 opacity-80 transition-transform group-hover:translate-x-0.5" />
       </>
+    );
+    return cta.href ? (
+      <a href={cta.href} className={cls}>
+        {inner}
+      </a>
+    ) : (
+      <button type="button" onClick={cta.onClick} className={cls}>
+        {inner}
+      </button>
     );
   };
 
@@ -127,8 +131,8 @@ export function VolumetricHero({
   );
 
   return (
-    <section className="relative h-screen min-h-[680px] w-full bg-black">
-      <VolumetricStudio className="h-full">
+    <section className="relative h-[82vh] min-h-[560px] w-full bg-black md:h-screen md:min-h-[680px]">
+      <VolumetricStudio className="h-full" backWall={backWall}>
         {/* Ghosted brand word, sitting behind the van like a nameplate. */}
         <div className="pointer-events-none absolute inset-x-0 top-[8%] z-0 flex justify-center overflow-hidden md:top-[10%]">
           <motion.span
@@ -143,46 +147,52 @@ export function VolumetricHero({
         </div>
 
         {/* ===================== MOBILE (< md): vertical stack ===================== */}
-        <div className="relative z-[2] flex h-full flex-col px-6 pb-6 pt-[30vh] md:hidden">
-          <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1.1, delay: 1.7, ease: EASE }}
-            className="text-[3.3rem] leading-[0.98] tracking-tight text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.9)]"
-            style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-          >
-            {headlineInner}
-          </motion.h1>
+        <div className="relative z-[2] flex h-full flex-col justify-end px-6 pb-[13vh] md:hidden">
+          {/* Van/headline/CTA sit low in the room, the headline spaced clearly
+              below the van (no overlap) with the CTA under it. */}
+          <div className="flex flex-col items-center">
+            {/* Van grounded by a soft contact shadow under the wheels. The old
+                mirror reflection read as the van floating over glass, so it's
+                gone — this is a real floor shadow instead. */}
+            <div className="relative flex w-full max-w-[420px] flex-col items-center">
+              <motion.img
+                src="/assets/van-3d.png"
+                alt="TapaikoBazar electric van under studio lights"
+                initial={{ opacity: 0, y: 26, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 1.2, delay: 1.8, ease: EASE }}
+                className="relative z-[1] w-full object-contain drop-shadow-[0_10px_12px_rgba(0,0,0,0.5)]"
+              />
+              <div
+                aria-hidden
+                className="relative z-0 -mt-[8%] h-[32px] w-[72%] rounded-[50%]"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, rgba(0,0,0,0.85), rgba(0,0,0,0.5) 40%, transparent 72%)",
+                  filter: "blur(11px)",
+                }}
+              />
+            </div>
 
-          <motion.div
-            initial={{ y: 18, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 2.0, ease: EASE }}
-            className="pointer-events-auto mt-7 flex flex-col gap-3"
-          >
-            {renderCtas(true)}
-          </motion.div>
+            {/* Headline nested into that shadow, right beneath the van. */}
+            <motion.h1
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 1.95, ease: EASE }}
+              className="relative z-[2] mt-6 whitespace-nowrap text-center text-[1.75rem] leading-[1] tracking-tight text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.9)]"
+              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+            >
+              {headlineInnerMobile}
+            </motion.h1>
 
-          {/* Van at the bottom, large, with a floor reflection. */}
-          <div className="relative mt-auto -mx-6 flex flex-col items-center">
-            <motion.img
-              src="/assets/van-3d.png"
-              alt="TapaikoBazar electric van under studio lights"
-              initial={{ opacity: 0, y: 26, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1.2, delay: 1.8, ease: EASE }}
-              className="w-[112%] max-w-none object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.6)]"
-            />
-            <img
-              aria-hidden
-              src="/assets/van-3d.png"
-              alt=""
-              className="-mt-[2%] w-[112%] max-w-none -scale-y-100 object-contain opacity-[0.18]"
-              style={{
-                maskImage: "linear-gradient(to bottom, black, transparent 55%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black, transparent 55%)",
-              }}
-            />
+            <motion.div
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2.05, ease: EASE }}
+              className="pointer-events-auto mt-4 flex justify-center"
+            >
+              {renderCtas(true)}
+            </motion.div>
           </div>
         </div>
 
