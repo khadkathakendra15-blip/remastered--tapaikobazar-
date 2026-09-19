@@ -13,6 +13,14 @@ import Recondition from './pages/Recondition';
 import TwoWheelerStore from './pages/TwoWheelerStore';
 import VehicleDetail from './pages/VehicleDetail';
 
+/* Redirect to webmail cPanel interface directly */
+function WebmailRedirect() {
+  useEffect(() => {
+    window.location.replace('https://s782.bom1.mysecurecloudhost.com:2096/');
+  }, []);
+  return null;
+}
+
 /* Clears the masthead, which is fixed. */
 const HEAD_ROOM = 96;
 
@@ -84,6 +92,7 @@ export default function App() {
             <Route path="/journal" element={<Blog />} />
             <Route path="/journal/:slug" element={<BlogPost />} />
             <Route path="/about" element={<About />} />
+            <Route path="/webmail" element={<WebmailRedirect />} />
             <Route path="*" element={<Browse />} />
           </Routes>
         </main>

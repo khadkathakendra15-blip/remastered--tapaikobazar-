@@ -328,8 +328,6 @@ export const VolumetricStudio = ({
         intensity={1}
         lightColor="230,240,255"
         spots={[35, 50, 65]}
-        /* TapaikoBazar brand: left beam red, centre white, right beam blue. */
-        spotColors={["255,70,84", "235,242,255", "70,120,255"]}
         isFlickering={isFlickering}
         backWall={backWall ?? { tl: [20, 8], tr: [80, 8], br: [80, 56], bl: [20, 56] }}
       />
