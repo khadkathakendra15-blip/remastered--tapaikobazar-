@@ -31,10 +31,10 @@ export const ALL_TW = CATALOGUE.filter((v) => catOf(v) === 'tw');
 
 export function findVehicle(id, list = activeCatalogue) {
   if (!id) return null;
-  const match = list.find((v) => v.id === id || v._id === id);
+  const match = list.find((v) => v.id === id || v._id === id || (v.aliases && v.aliases.includes(id)));
   if (match) return match;
   // Fallback search in base catalogue
-  return CATALOGUE.find((v) => v.id === id) || null;
+  return CATALOGUE.find((v) => v.id === id || (v.aliases && v.aliases.includes(id))) || null;
 }
 
 export function brandKeys(list) {

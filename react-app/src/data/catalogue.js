@@ -32,10 +32,11 @@ const IMG = {
   seres: 'https://cdn.motor1.com/images/mgl/JljwJ/s3/huawei-seres-sf5-lead-image.webp',
 
   /* Electric scooters */
+  vetraAeron: '/assets/modes-main.jpg',
   winger: 'https://sarathiecooter.com.np/wp-content/uploads/2025/05/winger-300x300.jpg',
   e3g: 'https://sarathiecooter.com.np/wp-content/uploads/2025/07/Ecooter-E3-Gray.png',
   e3l: 'https://sarathiecooter.com.np/wp-content/uploads/2025/05/graywithgreen-300x300.jpg',
-  mnk3: '/assets/scooter-modes.webp',
+  mnk3: null,
   s90: 'https://sarathiecooter.com.np/wp-content/uploads/2025/05/Luyuan-S90-Photo-1-300x300.webp',
   garow: 'https://garowgroup.com/Upload/%E4%BA%A7%E5%93%81/%E5%B3%B0%E4%BA%91/%E5%B7%A645-8efdcb9f88b045639b03999e44887d60.jpg',
 
@@ -363,9 +364,36 @@ const CATALOGUE = [
 
   /* --------------------------------------------------------- scooters ----- */
 
-  { id: 'mnk3', type: 'scooter', brand: 'Luyuan', name: 'Luyuan MNK3', price: 192600,
+  { id: 'vetra-aeron', aliases: ['mnk3', 'aeron'], type: 'scooter', brand: 'Vetra', name: 'Vetra Aeron', price: 385000,
+    priceLabel: 'NPR 3,85,000', down: 0, img: IMG.vetraAeron,
+    blurb: 'A premium long-range electric scooter engineered for Nepal. 273+ km single charge range powered by an 8.064 kWh LFP battery and a 5000W peak hub motor delivering 180 Nm torque.',
+    specs: [
+      ['Battery pack', '8.064 kWh LFP (72V) sealed water-resistant'],
+      ['Range (Eco mode)', '273+ km on a single charge'],
+      ['Range (Normal / Sport)', '220 km (Normal) · ~180 km (Sport)'],
+      ['Peak motor power', '5000 W (3000 W rated hub motor)'],
+      ['Instant torque', '180 Nm pull on climbs and overtakes'],
+      ['Top speed', '75 – 80 km/h'],
+      ['Riding modes', 'Eco, Normal, Sport'],
+      ['Braking system', 'Large front & rear discs with Combined Braking (CBS)'],
+      ['Tyres & wheels', '90/90-12 front and rear (12-inch wheels)'],
+      ['Hill assist', 'AutoHold — holds on inclines without holding the brake'],
+      ['Safety alerts', 'Emergency hazard lights trigger automatically on hard stops'],
+      ['Connected features', 'Built-in GPS tracking & route history'],
+      ['Convenience', 'USB Type-C charger on-board, roomy footboard'],
+      ['Lighting', 'LED front signature with daytime running lights (DRL)'],
+      ['Warranty', '3 years / 50,000 km battery · 3 years / 30,000 km vehicle · 3 years charger']
+    ],
+    highlights: [
+      'Two hundred seventy-three kilometres on a single charge with 8.064 kWh LFP battery.',
+      'Five thousand watt peak hub motor with 180 Nm torque and AutoHold incline assist.',
+      'Large front and rear disc brakes with Combined Braking System (CBS).',
+      'Three-year warranty on vehicle, LFP battery and supplied charger.'
+    ] },
+
+  { id: 'luyuan-mnk3', type: 'scooter', brand: 'Luyuan', name: 'Luyuan MNK3', price: 192600,
     priceLabel: 'NPR 1,92,600 – 2,37,600', down: 0, img: IMG.mnk3,
-    blurb: 'The cheapest electric scooter on our floor, with NFC security and an oil cooled hub motor.',
+    blurb: 'A budget electric scooter on our floor, with NFC security and an oil cooled hub motor.',
     specs: [['Rated motor', '1500W oil cooled hub'], ['Peak power', '2800 W'], ['Battery', '72V 38AH graphene gel'], ['Charging time', '5 – 6 hours'], ['Range', 'Up to 120 km'], ['Speed', '60 – 65 km/h'], ['Brakes', 'Front and rear disc'], ['Security', 'NFC, anti theft, wheel lock'], ['Display', 'LCD with LED DRL'], ['Extras', 'USB charging, 180mm clearance']],
     highlights: ['Lowest priced electric scooter we sell.', 'NFC security and LED daytime running lights.', 'Up to one hundred twenty kilometres of range.'] },
 
@@ -443,6 +471,7 @@ const CATALOGUE = [
 
    Not every model is on the floor on any given day; the counter confirms. */
 const TWO_WHEELER_LIST = [
+  ['Vetra', 'Vetra Aeron', 385000, '5000W peak · 273+ km · 8.064 kWh LFP · Disc CBS', IMG.vetraAeron],
   ['Honda', 'Honda Shine 125', 260900, '124cc · 65 kmpl · 10.5 PS · Disc', IMG.hondaShine],
   ['Honda', 'Honda SP 125', 275000, '124cc · 65 kmpl · 10.9 PS · Disc', IMG.hondaSp125],
   ['Honda', 'Honda Unicorn', 295000, '162.7cc · 55 kmpl · 13.3 PS · Disc'],
