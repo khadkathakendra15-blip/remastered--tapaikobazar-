@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquareText, X, Send, ChevronLeft, Phone, MapPin, Sparkles } from 'lucide-react';
+import { MessageSquareText, X, Send, Phone, MapPin, Sparkles } from 'lucide-react';
 import { CATALOGUE, CONTACT, DOCS, HOW_TO_BUY, FINANCE_DEFAULTS } from '../data/catalogue';
 import { npr, emi } from '../lib/format';
 
