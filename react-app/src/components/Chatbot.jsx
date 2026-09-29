@@ -277,7 +277,7 @@ export default function Chatbot() {
   return (
     <>
       {/* Launcher — bottom-right, button in the corner with the AI nudge to its left */}
-      <div className="fixed bottom-5 right-5 z-[70] flex flex-row-reverse items-center gap-3 sm:bottom-6 sm:right-6">
+      <div className={`fixed bottom-5 right-5 z-[70] flex flex-row-reverse items-center gap-3 sm:bottom-6 sm:right-6 ${open ? 'max-sm:hidden' : ''}`}>
         <motion.button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -312,7 +312,7 @@ export default function Chatbot() {
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
-              className="hidden items-center gap-2 rounded-full bg-white py-2 pl-3 pr-3.5 text-sm font-medium text-gray-800 shadow-[0_8px_30px_rgba(0,0,0,0.15)] ring-1 ring-black/5 hover:bg-gray-50 sm:flex"
+              className="flex items-center gap-2 rounded-full bg-white py-2 pl-3 pr-3 text-[13px] font-medium text-gray-800 shadow-[0_8px_30px_rgba(0,0,0,0.15)] ring-1 ring-black/5 hover:bg-gray-50 sm:pr-3.5 sm:text-sm"
             >
               <Sparkles className="h-4 w-4 shrink-0 text-[#FF4D5E]" />
               <span className="whitespace-nowrap">
@@ -342,7 +342,7 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-            className="fixed bottom-24 left-3 right-3 z-[69] mx-auto flex max-h-[76vh] w-auto flex-col overflow-hidden rounded-3xl bg-white shadow-[0_20px_70px_rgba(0,0,0,0.28)] ring-1 ring-black/5 sm:right-6 sm:left-auto sm:mx-0 sm:h-[560px] sm:w-[384px]"
+            className="fixed bottom-3 left-2 right-2 z-[69] flex h-[84vh] w-auto flex-col overflow-hidden rounded-3xl bg-white shadow-[0_20px_70px_rgba(0,0,0,0.28)] ring-1 ring-black/5 sm:bottom-24 sm:left-auto sm:right-6 sm:h-[560px] sm:w-[384px]"
           >
             {/* Header */}
             <div className="relative flex items-center gap-3 px-4 py-3.5 text-white" style={{ background: 'linear-gradient(135deg, #17233b 0%, #0b1a2b 100%)' }}>
