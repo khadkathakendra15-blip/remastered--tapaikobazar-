@@ -364,8 +364,8 @@ const CATALOGUE = [
 
   /* --------------------------------------------------------- scooters ----- */
 
-  { id: 'vetra-aeron', aliases: ['mnk3', 'aeron'], type: 'scooter', brand: 'Vetra', name: 'Vetra Aeron', price: 385000,
-    priceLabel: 'NPR 3,85,000', down: 0, img: IMG.vetraAeron,
+  { id: 'vetra-aeron', aliases: ['mnk3', 'aeron'], type: 'scooter', brand: 'Vetra', name: 'Vetra Aeron', price: 380000,
+    priceLabel: 'NPR 3,80,000', down: 0, img: IMG.vetraAeron,
     blurb: 'A premium long-range electric scooter engineered for Nepal. 273+ km single charge range powered by an 8.064 kWh LFP battery and a 5000W peak hub motor delivering 180 Nm torque.',
     specs: [
       ['Battery pack', '8.064 kWh LFP (72V) sealed water-resistant'],
@@ -471,7 +471,7 @@ const CATALOGUE = [
 
    Not every model is on the floor on any given day; the counter confirms. */
 const TWO_WHEELER_LIST = [
-  ['Vetra', 'Vetra Aeron', 385000, '5000W peak · 273+ km · 8.064 kWh LFP · Disc CBS', IMG.vetraAeron],
+  ['Vetra', 'Vetra Aeron', 380000, '5000W peak · 273+ km · 8.064 kWh LFP · Disc CBS', IMG.vetraAeron],
   ['Honda', 'Honda Shine 125', 260900, '124cc · 65 kmpl · 10.5 PS · Disc', IMG.hondaShine],
   ['Honda', 'Honda SP 125', 275000, '124cc · 65 kmpl · 10.9 PS · Disc', IMG.hondaSp125],
   ['Honda', 'Honda Unicorn', 295000, '162.7cc · 55 kmpl · 13.3 PS · Disc'],
